@@ -10,7 +10,6 @@ pipeline {
     }
 
     environment {
-        //TODO: Customize these variables for your environment
         DEV_PROJECT = "timro-us-movies-dev"
         STAGE_PROJECT = "timro-us-movies-stage"
         APP_GIT_URL = "https://github.com/timroster/DO288-apps"
@@ -83,16 +82,13 @@ pipeline {
                     }
                 }
                 sh '''
-                // TODO: Create a new OpenShift application based on the ${APP_NAME}:latest image stream
                 oc new-app --as-deployment-config ${APP_NAME}:latest -n ${DEV_PROJECT}
-                // TODO: Expose the ${APP_NAME} service for external access
                 oc expose svc ${APP_NAME}
                 '''
             }
         }
 
         stage('Wait for deployment in DEV env') {
-            //TODO: Watch deployment until pod is in 'Running' state
             steps {
                 script {
                     openshift.withCluster() {
@@ -130,7 +126,6 @@ pipeline {
                    '''
 
                 echo '### Creating a new app in Staging ###'
-                // TODO: Create a new app in staging and expose the service
                 sh '''
                        oc project ${STAGE_PROJECT}
                        oc new-app --as-deployment-config -i ${APP_NAME}:stage --name ${APP_NAME}
