@@ -2,7 +2,7 @@
 
 echo "Performing the S2I build..."
 
-/usr/libexec/s2i/assemble.sh
+/usr/libexec/s2i/assemble
 
 rc=$?
 
